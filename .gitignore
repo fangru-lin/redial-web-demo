@@ -25,3 +25,11 @@ pnpm-debug.log*
 
 # stress test
 src/pages/stress-test.mdx
+src/assets/egs.pdf
+src/assets/‎annotation.mov
+src/assets/‎annotation-redial.mov
+src/assets/illustration.mov
+src/assets/illustrations.mov
+src/assets/illustration.gif
+src/assets/egs.png
+src/assets/egs.jpg

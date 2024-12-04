@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
-title: Academic Project Page Template
-description: Simple project page template for your research paper, built with Astro and Tailwind CSS
+title: "One Language, Many Gaps: Evaluating Dialect Fairness and Robustness of Large Language Models in Reasoning Tasks"
+description: State-of-the-Art LLMs show significant biases to reasoning prompts expressed in non-standard dialect.
 favicon: favicon.svg
 thumbnail: screenshot.png
 ---
@@ -18,8 +18,10 @@ import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 
-import outside from "../assets/outside.mp4";
+import illustration from "../assets/illustration.mp4";
+import annotation from "../assets/annotation.mp4";
 import transformer from "../assets/transformer.webp";
+import egs from "../assets/egs.webp";
 import Splat from "../components/Splat.tsx"
 
 import CodeBlock from "../components/CodeBlock.astro";
@@ -30,125 +32,191 @@ export const components = {pre: CodeBlock, table: Table}
   title={frontmatter.title}
   authors={[
     {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "Independent",
-      notes: ["*", "†"],
+      name: "Fangru Lin",
+      url: "https://fangru-lin.github.io/",
+      notes: ["1"],
     },
     {
-      name: "Author Two",
-      institution: "Institution Two",
-      notes: ["*", "†"],
+      name: "Shaoguang Mao",
+      url: "https://dawnmsg.github.io",
+      notes: ["2"],
     },
     {
-      name: "Author Three",
-      institution: "Institution Three",
-      notes: ["†"],
+      name: "Emanuele La Malfa",
+      url: "https://emanuelelm.github.io/",
+      notes: ["1", "3"],
     },
     {
-      name: "Author Four",
-      institution: "Institution Four",
+      name: "Valentin Hofmann",
+      url: "https://valentinhofmann.github.io/",
+      notes: ["4", "5"],
+    },
+    {
+      name: "Adrian de Wynter",
+      url: "https://adewynter.github.io/",
+      notes: ["6", "7"],
+    },
+    {
+      name: "Jing Yao",
+      notes: ["2"],
+    },
+    {
+      name: "Si-Qing Chen",
+      notes: ["6"],
+    },
+    {
+      name: "Michael Wooldridge",
+      notes: ["1","3"],
+    },
+    {
+      name: "Furu Wei",
+      notes: ["2"],
     },
   ]}
-  conference="Conference Name"
+
   notes={[
     {
-      symbol: "*",
-      text: "author note one",
+      symbol: "1",
+      text: "University of Oxford",
     },
     {
-      symbol: "†",
-      text: "author note two",
+      symbol: "2",
+      text: "Microsoft Research",
+    },
+    {
+      symbol: "3",
+      text: "Alan Turing Institute",
+    },
+    {
+      symbol: "4",
+      text: "Allen Institute for AI",
+    },
+    {
+      symbol: "5",
+      text: "University of Washington",
+    },
+    {
+      symbol: "6",
+      text: "Microsoft Corporation",
+    },
+    {
+      symbol: "7",
+      text: "University of York",
     },
   ]}
   links={[
     {
       name: "Paper",
-      url: "",
+      url: "https://arxiv.org/pdf/2410.11005v1",
       icon: "fa-solid:file-pdf",
     },
     {
       name: "Code",
-      url: "https://github.com/RomanHauksson/academic-project-astro-template",
+      url: "https://github.com/fangru-lin/redial_dialect_robustness_fairness",
       icon: "mdi:github",
     },
     {
       name: "arXiv",
-      url: "",
+      url: "https://arxiv.org/abs/2410.11005v1",
       icon: "academicons:arxiv",
     },
   ]}
   />
+<Video source={annotation} />
 
-<Video source={outside} />
 
-<HighlightedSection>
 
-## Abstract
+## What is ReDial?
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+**ReDial** (**Re**asoning with **Dial**ect Queries) is a benchmark of more than 1.2K parallel Standardized English-AAVE query pairs.
 
-</HighlightedSection>
+| **Category**       | **Algorithm** (25.7%) |           | **Logic** (29.8%) |           | **Math** (24.7%) |           | **Comprehensive** (19.7%) | **Total** |
+|---------------------|-----------------------|-----------|-------------------|-----------|-------------------|-----------|---------------------------|-----------|
+| **Source**         | HumanEval             | MBPP      | LogicBench        | Folio     | GSM8K             | SVAMP     | AsyncHow                  | -         |
+| **Size**           | 164                   | 150       | 200               | 162       | 150               | 150       | 240                       | 1,216     |
 
-## Figures
+ReDial benchmarks four canonical reasoning tasks, namely **algorithm**, **logic**, **math**, and **comprehensive reasoning**. The task formulation is linguistically diverse, addresses cornerstone problems in human reasoning, and is of particular interest as it is challenging for LLMs. 
 
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
-
-<Figure
-    caption="Diagram of the transformer deep learning architecture."
-  >
-    <Image source={transformer} altText="Diagram of the transformer deep learning architecture." />
+<Figure>
+    <Image source={egs} altText="Examples of ReDial dataset." width="1403" height="991" />
 </Figure>
 
-## Two columns
+## How is ReDial constructed?
 
-Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom [React](https://react.dev/) component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+See a video demonstration of our workflow below:
 
-<TwoColumns>
-  <Figure slot="left" caption="Take a look at this YouTube video.">
-    <YouTubeVideo videoId="wjZofJX0v4M" />
-  </Figure>
-  <Figure slot="right" caption="Now look at this Gaussian Splat, rendered with a React component.">
-    <Splat client:idle />
-  </Figure>
-</TwoColumns>
+<Video source={illustration} />
 
-## Heading levels
+To obtain a highly curated dataset, we sample from seven widely used and established benchmarks.
 
-Use headings to divide your content into sections.
+For **Algorithm**, we sample 164 instances from [HumanEval](https://arxiv.org/abs/2107.03374), 150 from sanitized [MBPP](https://arxiv.org/abs/2108.07732). For **Math**, we sample 150 instances from [GSM8K](https://arxiv.org/abs/2110.14168) and 150 from [SVAMP](https://arxiv.org/abs/2103.07191). For Logic, we sample 200 instances from [LogicBench](https://arxiv.org/abs/2404.15522), and 162 from [Folio](https://arxiv.org/abs/2209.00840) and [Folio-perturbed](https://arxiv.org/abs/2307.02477). For **Comprehensive** reasoning, we sample 240 instances from [AsyncHow](https://arxiv.org/abs/2402.02805).
 
-### Heading 3
+We hire AAVE speakers and instruct them to rewrite each instance. For algorithm tasks that require an understanding of code to keep the semantics, we specifically hire expert AAVE annotators with computer science backgrounds.
 
-Go down a level to heading 3...
+To ensure the quality of the annotation, we conduct careful validations to ensure its **naturalness** and **correctness**. 
 
-#### Heading 4
+After this process, we obtain a high-quality, human-annotated dataset ReDial with more than 1.2K Standard English-AAVE parallel prompts in four canonical reasoning tasks. ReDial is the first benchmark of its kind and enables easy testing and analysis of LLMs' dialect fairness and robustness in reasoning tasks. 
 
-...and down again to heading 4.
+## Quick start
 
-## LaTeX
+Go to [this paper's github repo](https://github.com/fangru-lin/redial_dialect_robustness_fairness) and follow the ReadMe to have a quick start! The evaluation is fairly easy! You can either follow the instructions in this paper's repo or just use the standard pipelines as you want as we only modified example inputs but the outputs are exactly the same as source datasets.
 
-You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
+## Our findings
 
-<LaTeX formula="\int_a^b f(x) dx" />
+Below are the pass rates for testing models with zero-shot and CoT prompting on ReDial. Results in **bold** show a statistically significant deviation between AAVE and Standardized ReDial (i.e., models have significant drops in AAVE).
 
-## Tables
+| Model                        | Setting    | Original | AAVE                  |
+|------------------------------|------------|----------|-----------------------|
+| **GPT-4o**                  | Zero-shot  | 0.832    | **0.716** (Δ = 0.116) |
+|                              | CoT        | 0.826    | **0.784** (Δ = 0.043) |
+| **GPT-4**                   | Zero-shot  | 0.678    | **0.612** (Δ = 0.067) |
+|                              | CoT        | 0.706    | **0.590** (Δ = 0.115) |
+| **GPT-3.5-turbo**           | Zero-shot  | 0.531    | **0.460** (Δ = 0.072) |
+|                              | CoT        | 0.517    | **0.416** (Δ = 0.101) |
+| **LLaMA-3.1-70B-Instruct**  | Zero-shot  | 0.663    | **0.599** (Δ = 0.064) |
+|                              | CoT        | 0.759    | **0.711** (Δ = 0.049) |
+| **LLaMA-3-70B-Instruct**    | Zero-shot  | 0.628    | **0.562** (Δ = 0.066) |
+|                              | CoT        | 0.693    | **0.622** (Δ = 0.072) |
+| **LLaMA-3-8B-Instruct**     | Zero-shot  | 0.489    | 0.480 (Δ = 0.009)     |
+|                              | CoT        | 0.488    | 0.472 (Δ = 0.016)     |
+| **Mixtral-8x7B-Instruct-v0.1** | Zero-shot  | 0.388    | **0.274** (Δ = 0.114) |
+|                              | CoT        | 0.431    | **0.345** (Δ = 0.086) |
+| **Mistral-7B-Instruct-v0.3**| Zero-shot  | 0.297    | **0.214** (Δ = 0.083) |
+|                              | CoT        | 0.305    | **0.252** (Δ = 0.053) |
+| **Phi-3-Medium-128K-Instruct** | Zero-shot | 0.513    | **0.454** (Δ = 0.059) |
+|                              | CoT        | 0.513    | **0.458** (Δ = 0.055) |
+| **Phi-3-Small-128K-Instruct** | Zero-shot | 0.530    | **0.421** (Δ = 0.109) |
+|                              | CoT        | 0.549    | **0.429** (Δ = 0.119) |
+| **Phi-3-Mini-128K-Instruct** | Zero-shot  | 0.456    | **0.410** (Δ = 0.046) |
+|                              | CoT        | 0.528    | **0.461** (Δ = 0.067) |
 
-You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
 
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
+And here is the table for task-wise performance breakdown (results are averaged across all models).
+|                |                | **Algorithm** | **Math** | **Logic** | **Comprehensive** | **Average** |
+|----------------|----------------|---------------|----------|-----------|--------------------|-------------|
+| **Zero-shot**  | Original       | 0.602         | 0.733    | 0.578     | 0.191              | 0.546       |
+|                | AAVE           | **0.517**<sub>Δ=0.085</sub> | **0.665**<sub>Δ=0.068</sub> | **0.522**<sub>Δ=0.056</sub> | **0.101**<sub>Δ=0.090</sub> | **0.473**<sub>Δ=0.073</sub> |
+| **CoT**        | Original       | 0.597         | 0.811    | 0.580     | 0.240              | 0.574       |
+|                | AAVE           | **0.495**<sub>Δ=0.102</sub> | **0.742**<sub>Δ=0.068</sub> | **0.530**<sub>Δ=0.050</sub> | **0.177**<sub>Δ=0.063</sub> | **0.504**<sub>Δ=0.070</sub> |
+
+
+We find that all models and all tasks have drops in AAVE data! This indicates that our benchmark poses huge challenges to models, both in terms of absolute performance and with respect to their dialect robustness and fairness.
+
+## Other findings
+
+We also find that the lack of understanding of AAVE does not explain the performance drop, and that the drop cannot be easily mitigated by advanced prompting method: this indicates that even if non-standard dialect users are willing to pay more at inference time, they still cannot get as good service as standard dialect users!
+
+You can see more details in [our paper](https://arxiv.org/pdf/2410.11005v1) and also try it out yourself!
 
 ## BibTeX citation
 
+If you find our work useful, you can cite it as:
+
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@article{lin2024one,
+  title={One Language, Many Gaps: Evaluating Dialect Fairness and Robustness of Large Language Models in Reasoning Tasks},
+  author={Lin, Fangru and Mao, Shaoguang and La Malfa, Emanuele and Hofmann, Valentin and de Wynter, Adrian and Yao, Jing and Chen, Si-Qing and Wooldridge, Michael and Wei, Furu},
+  journal={arXiv preprint arXiv:2410.11005},
+  year={2024}
 }
 ```
